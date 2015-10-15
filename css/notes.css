@@ -1,0 +1,165 @@
+@media screen {
+    a {
+        text-decoration: none;
+    }
+    body {
+        padding: 0 0px;
+        margin: 0 auto;
+        background: #aaa;
+        /*max-width: 800px;*/
+    }
+    #msg {
+        margin: 0 auto;
+        padding: 2px 15px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        background: #fff;
+        width: 30%;
+        transition: all 1s;
+        overflow: hidden;
+        position: absolute;
+        top: -15px;
+        left: 33%;
+        text-align: center;
+    }
+    #msg.hide {
+        opacity: 0;
+    }
+    #msg.info {
+        color: #6193c1;
+    }
+    #msg.error {
+        color: red;
+    }
+    #layout {
+        margin: 0 auto;
+        max-width: 800px;
+        min-width: 300px;
+    }
+    #header {
+        text-align: center;
+        padding: 15px 10px;
+        font-size: 2em;
+        background: #444;
+        color: #fff;
+        font-family: cursive;
+    }
+    #searchbar {
+        text-align: center;
+        white-space: nowrap;
+        padding: 2px 0;
+    }
+    #search_icon {
+        position: relative;
+        left: 30px;
+        z-index: 9;
+    }
+    #searchfor {
+        width: 60%;
+        padding: 10px;
+        text-indent: 25px;
+        border-radius: 30px;
+        border: 1px solid #ddd;
+        outline: 0;
+    }
+    #add_note_btn {
+        position: absolute;
+        top: -25px;
+        right: 60px;
+        z-index: 9;
+    }
+    #add_note_btn:focus .fa {
+        box-shadow: 5px 5px 20px #000;
+        border: 1px silver #555;
+    }
+    #add_note_btn .fa {
+        position: fixed;
+        padding: 16px 17px;
+        border-radius: 30px;
+        background: #4285F4;
+        color: #fff;
+        box-shadow: 2px 2px 5px #000;
+    }
+    #main_view {
+        position: relative;
+        background: #eee;
+        padding: 10px;
+    }
+    .clear {
+        clear: both;
+    }
+    .time {
+        font-size: 11px;
+        color: #aaa;
+        float: left;
+    }
+    .note_data {
+        padding: 0 20px;
+        outline: 0;
+        background-image: linear-gradient(to right, transparent 0, transparent 0), linear-gradient(#ddd 0, #FFFFEC 1px);
+        background-size: 1px 31px;
+        line-height: 31px;
+        min-height: 61px;
+    }
+    #notes_list.with_single_item {
+        -moz-columns: 32em;
+        columns: 32em;
+        -webkit-columns: 32em;
+    }
+    #notes_list {
+        -moz-columns: 16em;
+        columns: 16em;
+        -webkit-columns: 16em;
+        -moz-column-gap: 1em;
+        -webkit-column-gap: 1em;
+        column-gap: 1em;
+        padding: 10px;
+    }
+    .shadow {
+        box-shadow: 3px 3px 5px #ccc;
+        border: 1px solid #ccc;
+    }
+    .note {
+        padding: 0;
+        transition: all 400ms;
+        -webkit-column-break-inside: avoid;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    .note.active .shadow {
+        box-shadow: 5px 5px 10px #aaa;
+    }
+    .note_controls {
+        background: #fff;
+        text-align: right;
+        padding: 0 10px;
+        line-height: 30px;
+        height: 30px;
+        transition: all 400ms;
+        font-size: 12px;
+    }
+    .note_controls a {
+        font-size: 25px;
+    }
+    .note:nth-child(2n) {
+        margin-right: 0;
+    }
+    #footer {
+        border-top: 1px solid #ddd;
+        font-size: small;
+        padding: 10px;
+        background: #ddd;
+        text-align: center;
+    }
+    .button {
+        color: #1E87BD;
+        text-decoration: none;
+        margin: 0 2px;
+        padding: 0 2%;
+    }
+    .button.delete {
+        color: red;
+        position: relative;
+        right: -10px;
+    }
+}

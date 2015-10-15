@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simply Note</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/notes.css">
+    <meta charset='utf-8'>
+    <meta name="author" content="Rajendra Patil">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div id="layout">
+        <div id="header">Simply Note</div>
+        <div id="view_container"></div>
+        <div id="footer">
+            Simple Notes management app by <a href="http://rpatil26.github.io">Rajendra Patil</a>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.min.js"></script>
+    <!-- MY LIB -->
+    <script src="js/mylib.js"></script>
+    <!-- Plain JS VIEW. Use in Controller -->
+    <script src="js/notesReactView.js"></script>
+    <script src="js/notesService.js"></script>
+    <script src="js/notesController.js"></script>
+    <script>
+    new NotesController().launch({});
+    </script>
+</body>
+
+</html>

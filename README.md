@@ -1,5 +1,4 @@
-Simply Note
-
+# Simply Note
 - This Notes APP is built using Plain js and React JS for the view components.
 - The js Folder contains the JavaScript files
 - If you modify jsx then you need to use babel to get it converted to js
@@ -13,3 +12,8 @@ Simply Note
 
 - index.html - the main landing page of the app
 - css folder contain single css - notes.css
+
+## Demo Gif
+![Demo Animating Gif](https://raw.githubusercontent.com/rpatil26/js-notes/master/notes-app-demo.gif)
+## Live Demo
+[Launch it here] (https://rawgit.com/rpatil26/js-notes/master/index.html)

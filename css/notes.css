@@ -14,14 +14,12 @@
         border-radius: 10px;
         background: #6193c1;
         color: yellow;
-        max-width: 40%;
         font-size: small;
         transition: all 1s;
         overflow: hidden;
         position: fixed;
         top: 2px;
         z-index: 99;
-        right: 5px;
         text-align: center;
         transition: all 800ms;
     }

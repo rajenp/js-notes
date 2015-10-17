@@ -173,12 +173,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     { href: 'javascript:void(0)', id: 'add_note_btn', onClick: this.showNote },
                     React.createElement('i', { className: 'fa fa-pencil' })
                 ),
+                React.createElement(NoteFilter, { onSearch: this.props.onSearch }),
                 React.createElement(
                     'div',
                     { id: 'msg' },
                     'Loading...'
                 ),
-                React.createElement(NoteFilter, { onSearch: this.props.onSearch }),
                 React.createElement(NotesList, {
                     notes: this.state.notes,
                     onCancel: this.onCancel,

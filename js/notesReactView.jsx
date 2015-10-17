@@ -148,8 +148,8 @@
             return (
                 <div id="main_view">
                     <a href="javascript:void(0)" id="add_note_btn" onClick={this.showNote}><i className="fa fa-pencil"></i></a>
-                    <div id='msg'>Loading...</div>
                     <NoteFilter onSearch={this.props.onSearch}/>
+                    <div id='msg'>Loading...</div>
                     <NotesList
                         notes={this.state.notes}
                         onCancel={this.onCancel}

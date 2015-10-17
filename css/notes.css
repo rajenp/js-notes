@@ -6,40 +6,42 @@
         padding: 0 0px;
         margin: 0 auto;
         background: #aaa;
-        /*max-width: 800px;*/
     }
     #msg {
         margin: 0 auto;
-        padding: 2px 15px;
-        border: 1px solid #ddd;
-        border-radius: 20px;
-        background: #fff;
-        width: 30%;
+        padding: 2px 10px;
+        /*border: 1px solid #fff;*/
+        border-radius: 10px;
+        background: #6193c1;
+        color: yellow;
+        max-width: 40%;
+        font-size: small;
         transition: all 1s;
         overflow: hidden;
-        position: absolute;
-        top: -15px;
-        left: 33%;
+        position: fixed;
+        top: 2px;
+        z-index: 99;
+        right: 5px;
         text-align: center;
+        transition: all 800ms;
     }
     #msg.hide {
         opacity: 0;
     }
-    #msg.info {
-        color: #6193c1;
-    }
     #msg.error {
-        color: red;
+        background: red;
     }
-    #layout {
-        margin: 0 auto;
+    #layout, #header, #footer {
         max-width: 800px;
         min-width: 300px;
-        height:100vh;
+        margin: 0 auto;
+    }
+    #layout {
+        height: 100vh;
     }
     #header {
         text-align: center;
-        padding: 15px 10px;
+        padding: 10px;
         font-size: 2em;
         background: #444;
         color: #fff;
@@ -56,9 +58,9 @@
         z-index: 9;
     }
     #searchfor {
-        width: 60%;
-        padding: 10px;
-        text-indent: 25px;
+        width: 58%;
+        padding: 10px 0;
+        text-indent: 35px;
         border-radius: 30px;
         border: 1px solid #ddd;
         outline: 0;
@@ -66,7 +68,7 @@
     #add_note_btn {
         position: absolute;
         top: -25px;
-        right: 60px;
+        right: 55px;
         z-index: 9;
     }
     #add_note_btn:focus .fa {
@@ -83,15 +85,18 @@
     }
     #main_view {
         position: relative;
-        background: #eee;
-        padding: 10px;
+        background: #ddd;
+        padding: 5px 10px;
+        min-height: 90vh;
+        margin-bottom: 15px;
+        border:1px solid #ccc;
     }
     .clear {
         clear: both;
     }
     .time {
         font-size: 11px;
-        color: #aaa;
+        color: #999;
         float: left;
     }
     .note_data {
@@ -148,9 +153,12 @@
     #footer {
         border-top: 1px solid #ddd;
         font-size: small;
-        padding: 10px;
-        background: #ddd;
+        padding: 5px 0;
+        background: #fff;
         text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
     }
     .button {
         color: #1E87BD;

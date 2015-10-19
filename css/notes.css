@@ -34,9 +34,6 @@
         min-width: 300px;
         margin: 0 auto;
     }
-    #layout {
-        height: 100vh;
-    }
     #header {
         text-align: center;
         padding: 10px;
@@ -55,6 +52,12 @@
         left: 30px;
         z-index: 9;
     }
+    #search_icon:before {
+        content: "\26B2";
+        font-style: normal;
+        transform: scale(1.5) rotate(-45deg);
+        display: inline-block;
+    }
     #searchfor {
         width: 58%;
         padding: 10px 0;
@@ -65,8 +68,8 @@
     }
     #add_note_btn {
         position: absolute;
-        top: -25px;
-        right: 55px;
+        top: -28px;
+        right: 60px;
         z-index: 9;
     }
     #add_note_btn:focus .fa {
@@ -75,11 +78,21 @@
     }
     #add_note_btn .fa {
         position: fixed;
-        padding: 16px 17px;
         border-radius: 30px;
         background: #4285F4;
         color: #fff;
         box-shadow: 2px 2px 5px #000;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+    }
+    #add_note_btn .fa:before {
+        content: "\270D";
+        font-size: 30px;
+        position: relative;
+        left:14px;
+        top:-2px;
+        font-style: normal;
     }
     #main_view {
         position: relative;
@@ -163,6 +176,11 @@
         text-decoration: none;
         margin: 0 2px;
         padding: 0 2%;
+    }
+    .button.delete:before {
+        content: "\2297";
+        font-size: 30px;
+        padding: 2px;
     }
     .button.delete {
         color: red;

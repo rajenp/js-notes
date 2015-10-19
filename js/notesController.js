@@ -90,7 +90,7 @@
         },
         updateNote: function(note) {
             if (note) {
-                this._view.showMessage("Updating note...");
+                //this._view.showMessage("Updating note...");
                 this._service.updateNote(note, new myLib.Callback(this.noteUpdated, this));
             }
         },
@@ -98,7 +98,7 @@
             var note = this._preProcessResponse(response);
             if (note) {
                 //this._view.updateNote(note.id, note);
-                this._view.showMessage("note saved");
+                //this._view.showMessage("note saved");
             }
         },
         //clear

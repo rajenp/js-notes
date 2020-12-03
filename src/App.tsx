@@ -7,11 +7,19 @@ const App: React.FC = () => {
   const notes = [
     {
       time: new Date().getTime(),
-      content: "Test"
+      content: "Note one"
     },
     {
       time: new Date().getTime(),
-      content: "Test1"
+      content: "Note 2"
+    },
+    {
+      time: new Date().getTime(),
+      content: "Note 3"
+    },
+    {
+      time: new Date().getTime(),
+      content: "Note 4"
     }
   ];
   return (

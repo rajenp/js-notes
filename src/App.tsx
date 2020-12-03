@@ -25,7 +25,7 @@ const App: React.FC = () => {
         <List notes={notes} />
       </div>
       <div className="App-footer">
-        Simple Notes management app by <a href="http://rpatil26.github.io">Rajendra Patil</a>
+        Simple Notes management app by Rajendra Patil
       </div>
     </div>
   );

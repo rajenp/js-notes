@@ -1,0 +1,40 @@
+.App {
+    display: flex;
+    margin: 0 auto;
+    max-width: 800px;
+    min-width: 300px;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.App-logo {
+    pointer-events: none;
+    width: 48px;
+    margin-right: 8px;
+}
+
+.App-header {
+    background-color: #282c34;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    height: 40px;
+}
+
+.App-name {
+    font-size: 24px;
+    color: white;
+    font-family: cursive;
+}
+
+.App-main {
+    background: #ccc;
+    flex: 1 1 auto;
+    padding: 24px;
+}
+
+.App-footer {
+    align-items: center;
+    padding: 8px;
+    background: white;
+}

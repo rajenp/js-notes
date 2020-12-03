@@ -1,0 +1,13 @@
+.Search {
+    flex: 1 1 auto;
+}
+
+.Search-input {
+    border-radius: 8px;
+    padding: 10px 0;
+    text-indent: 35px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    outline: 0;
+    width: 80%;
+}

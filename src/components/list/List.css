@@ -1,0 +1,10 @@
+.List {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+@media (max-width: 780px) {
+    .List {
+        grid-template-columns: auto;
+    }
+}

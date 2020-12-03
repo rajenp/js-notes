@@ -1,0 +1,45 @@
+.Note {
+    padding: 0;
+    transition: all 400ms;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 1px 8px #888;
+    margin: 8px;
+    min-width: 300px;
+}
+
+.Note-header {
+    background: #fff;
+    padding: 0 8px;
+    transition: all 400ms;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 32px;
+}
+
+.Note-delete {
+    border-radius: 100%;
+    color: red;
+    border-radius: 100%;
+    background: white;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid red;
+    display: flex;
+    line-height: 24px;
+    font-size: 16px;
+}
+
+.Note-content {
+    padding: 0 20px;
+    outline: 0;
+    background-image: linear-gradient(to right, transparent 0, transparent 0), linear-gradient(#ddd 0, #FFFFEC 1px);
+    background-size: 1px 31px;
+    line-height: 31px;
+    min-height: 61px;
+}

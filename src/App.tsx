@@ -9,20 +9,14 @@ const App: React.FC = () => {
     {
       time: t,
       content: "Note one"
-    },
-    {
-      time: t + 1,
-      content: "Note 2"
-    },
-    {
-      time: t + 2,
-      content: "Note 3"
-    },
-    {
-      time: t + 3,
-      content: "Note 4"
-    }
+    },    
   ];
+
+  fetch("https://rajendrapatil-api.herokuapp.com/rajendrapatil/notes")
+      .then(res => res.json())
+      .then(res => {
+        setNoteState({notes: res.notes, searchQuery: noteState.searchQuery});
+      });
 
   const [noteState, setNoteState] = useState({ notes: initialNotes, searchQuery: "" });
 

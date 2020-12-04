@@ -1,5 +1,5 @@
 interface NoteData {
-    time: number,
+    time: string,
     content: string
 }
 

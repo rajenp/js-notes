@@ -11,7 +11,7 @@ const Note: React.FC<NoteProps> = ({ note, onDelete, onChange }: NoteProps) => {
     return (
         <div className="Note" id={note.time.toString()}>
             <div className="Note-header">
-                <div className="Note-time">{new Date(note.time).toLocaleString()}</div>
+                <div className="Note-time">{new Date(Number(note.time)).toLocaleString()}</div>
                 <button onClick={() => { onDelete(note) }}
                     className="Note-delete" tabIndex={0}>✕</button>
             </div>

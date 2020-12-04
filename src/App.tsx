@@ -1,54 +1,62 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Search from './components/search/Search'
 import List from './components/list/List';
+import NoteService from './services/NotesService'
+import { servicesVersion } from 'typescript';
+
+const API_URL = "https://rajendrapatil-api.herokuapp.com/rajendrapatil";
+// const API_URL = "http://localhost:8080/rajendrapatil"
 
 const App: React.FC = () => {
-  const t = Date.now();
-  const initialNotes = [
-    {
-      time: t,
-      content: "Note one"
-    },    
-  ];
 
-  fetch("https://rajendrapatil-api.herokuapp.com/rajendrapatil/notes")
-      .then(res => res.json())
-      .then(res => {
-        setNoteState({notes: res.notes, searchQuery: noteState.searchQuery});
-      });
-
+  const initialNotes: NoteData[] = [];
   const [noteState, setNoteState] = useState({ notes: initialNotes, searchQuery: "" });
+  const service = new NoteService(API_URL);
 
-  const deleteNote: DeleteNote = (selectedNote: NoteData) => {
-    const notes = noteState.notes.filter((note) => note !== selectedNote);
-    setNoteState({ notes, searchQuery: noteState.searchQuery });
-  }
+  useEffect(() => {
+    service.getUserNotes().then(res => {
+      repaintNote(res.notes || [])
+    });
+  }, [noteState.searchQuery]);
+
 
   const searchNotes: SearchNotes = (searchQuery) => {
-    setNoteState({ notes: noteState.notes, searchQuery: searchQuery });
+    repaintNote(noteState.notes, searchQuery)
+  }
+
+  const addNote: AddNote = (content: string) => {
+    service.addUserNote(content).then((newNote) => {
+      setNoteState({
+        notes: [newNote, ...noteState.notes],
+        searchQuery: noteState.searchQuery
+      });
+    });
   }
 
   const updateNote: UpdateNote = (updatedNote: NoteData) => {
-    const notes = noteState.notes.map((note) => {
-      let time = note.time;
-      let content = note.content;
-      if (note.time === updatedNote.time) {
-        content = updatedNote.content;
-        time = Date.now();
-      }
-      return { time, content };
+    service.updateUserNote(updatedNote).then((res) => {
+      const notes = noteState.notes.map((note) => {
+        let time = note.time;
+        let content = note.content;
+        if (note.time === updatedNote.time) {
+          content = updatedNote.content;
+        }
+        return { time, content };
+      });
+      repaintNote(notes)
     });
-
-    setNoteState({ notes: notes, searchQuery: noteState.searchQuery });
   }
-  const addNote: AddNote = (content: string) => {
-    const newNote = { time: Date.now(), content: content };
-    setNoteState({
-      notes: [newNote, ...noteState.notes],
-      searchQuery: noteState.searchQuery
-    });
 
+  const deleteNote: DeleteNote = async (selectedNote: NoteData) => {
+    await service.deleteUserNote(selectedNote.time).then((res) => {
+      const notes = noteState.notes.filter((note) => note !== selectedNote);
+      repaintNote(notes)
+    });
+  }
+
+  const repaintNote = (notes: NoteData[], searchQuery?: string) => {
+    setNoteState({ notes, searchQuery: searchQuery || noteState.searchQuery });
   }
 
   return (
@@ -72,7 +80,6 @@ const App: React.FC = () => {
       </div>
     </div>
   );
-
 }
 
 export default App;

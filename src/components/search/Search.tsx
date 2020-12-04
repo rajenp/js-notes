@@ -1,9 +1,21 @@
 import React from 'react';
 import './Search.css';
 
-const Search: React.FC = () => (
+interface SearchProps {
+    onSearch: SearchNotes
+    searchQuery?: string
+}
+
+const Search: React.FC<SearchProps> = ({ onSearch, searchQuery }) => (
     <div className="Search">
-        <input className="Search-input" type="search" placeholder="Search notes"></input>
+        <input
+            value={searchQuery}
+            className="Search-input"
+            type="text" placeholder="Search notes"
+            onChange={(evt) => {
+                searchQuery = evt.target.value;
+                onSearch(searchQuery)
+            }}></input>
     </div>
 );
 

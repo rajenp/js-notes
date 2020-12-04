@@ -2,9 +2,10 @@
     display: flex;
     margin: 0 auto;
     max-width: 800px;
-    min-width: 300px;
+    min-width: 380px;
     flex-direction: column;
     height: 100vh;
+    position: relative;
 }
 
 .App-logo,
@@ -35,12 +36,28 @@
     background: #ccc;
     flex: 1 1 auto;
     padding: 24px;
-    min-height: 320px;
+    min-height: 100px;
     overflow-y: auto;
 }
 
 .App-footer {
-    align-items: center;
+    text-align: center;
     padding: 8px;
     background: white;
+}
+
+.App-add-button {
+    height: 40px;
+    width: 40px;
+    border: 0 solid silver;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 32px;
+    justify-content: center;
+    background: yellow;
+    position: absolute;
+    right: 30px;
+    top: 32px;
+    box-shadow: 1px 1px 10px #000;
 }

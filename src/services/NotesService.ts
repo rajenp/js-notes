@@ -11,16 +11,16 @@ export default class NotesService {
             .then(res => res.json())
     }
 
-    async addUserNote(content: string): Promise<NoteData> {
-        const newNote = { time: String(Date.now()), content: content };
+    async addUserNote(note: NoteData): Promise<NoteData> {
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newNote)
+            body: JSON.stringify(note)
         };
-
         return fetch(`${this.endpoint}/notes/add`, requestOptions)
-            .then((res) => newNote);
+            .then((res) => {
+                return note;
+            });
     }
 
     async updateUserNote(note: NoteData) {
@@ -32,9 +32,7 @@ export default class NotesService {
         return fetch(`${this.endpoint}/notes/${note.time}/update`, requestOptions);
     }
 
-    async deleteUserNote(time: string) {
-        return fetch(`${this.endpoint}/notes/${time}/delete`, { method: "delete" });
-
+    async deleteUserNote(note: NoteData) {
+        return fetch(`${this.endpoint}/notes/${note.time}/delete`, { method: "delete" });
     }
-
 }

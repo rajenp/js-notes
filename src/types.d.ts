@@ -1,6 +1,7 @@
 interface NoteData {
     time: string,
     content: string
+    isBusy?: boolean
 }
 
 interface Notes {

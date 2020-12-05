@@ -1,6 +1,5 @@
 .Note {
-    padding: 0;
-    transition: all 400ms;
+    padding: 0 0 6px 0;
     -webkit-column-break-inside: avoid;
     page-break-inside: avoid;
     break-inside: avoid;

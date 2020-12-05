@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { expect } from 'chai';
 
 let noteData: NoteData = {
-    time: new Date().getTime(),
+    time: String(new Date().getTime()),
     content: "Test note"
 }
 let isDeleted = false;
@@ -19,8 +19,7 @@ const onUpdate: UpdateNote = (note: NoteData) => {
 configure({ adapter: new Adapter() });
 
 test('renders a editable Note', () => {
-    const note = renderShallow();
-
+    const note = renderShallow().find('.Note');
     expect(note.props().id).to.equal(String(noteData.time));
     expect(note.find('.Note-content').html())
         .to.equal(`<div class="Note-content" contenteditable="true" spellcheck="false">Test note</div>`);

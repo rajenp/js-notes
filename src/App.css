@@ -79,7 +79,7 @@
 .ShowsProgress::before {
     background: linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(230, 217, 217, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%) left/30px 30px repeat-x, linear-gradient(to right, rgb(196, 121, 9) 0%, rgb(223, 196, 46) 50%, rgb(128, 115, 0) 100%) left/var(--p, 100%) fixed, yellow;
     content: "";
-    animation: progress 100ms linear infinite;
+    animation: progress 500ms linear infinite;
     position: absolute;
     display: block;
     width: 100%;

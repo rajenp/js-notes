@@ -10,6 +10,7 @@
         "@types/node": "^14.14.10",
         "@types/react": "^16.0.0",
         "@types/react-dom": "^16.0.0",
+        "@types/react-transition-group": "^4.4.0",
         "react": "^16.0.1",
         "react-dom": "^16.0.1",
         "react-scripts": "4.0.1",
@@ -18,7 +19,8 @@
         "web-vitals": "^0.2.4"
     },
     "scripts": {
-        "start": "react-scripts start",
+        "start-dev": "react-scripts start",
+        "start": "node server.js",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
@@ -45,7 +47,6 @@
         "@types/chai": "^4.2.14",
         "@types/enzyme": "^3.10.8",
         "@types/enzyme-adapter-react-16": "^1.0.6",
-        "@types/react-transition-group": "^4.4.0",
         "chai": "^4.2.0",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.5",

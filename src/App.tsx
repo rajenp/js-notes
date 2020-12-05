@@ -5,7 +5,6 @@ import List from './components/list/List';
 import NoteService from './services/NotesService'
 
 const { REACT_APP_API_URL } = process.env;
-console.log(process.env);
 const App: React.FC = () => {
 
   const initialNotes: NoteData[] = [];

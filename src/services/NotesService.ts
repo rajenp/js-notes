@@ -33,6 +33,6 @@ export default class NotesService {
     }
 
     async deleteUserNote(note: NoteData) {
-        return fetch(`${this.endpoint}/notes/${note.time}/delete`, { method: "delete" });
+        return fetch(`${this.endpoint}/notes/${note.time}/delete`, { method: "DELETE" });
     }
 }

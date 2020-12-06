@@ -32,7 +32,7 @@ const App: React.FC = () => {
 
   const addNote: AddNote = (content: string) => {
     const newNote: NoteData = { time: String(Date.now()), content: content, isBusy: true };
-    repaintNote([newNote, ...noteState.notes]);
+    //repaintNote([newNote, ...noteState.notes]);
     service.addUserNote(newNote).then((res) => {
       delete newNote.isBusy;
       repaintNote([newNote, ...noteState.notes], "");
@@ -59,19 +59,22 @@ const App: React.FC = () => {
     repaintNote(noteState.notes);
     await service.deleteUserNote(selectedNote).then((res) => {
       const notes = noteState.notes.filter((note) => note !== selectedNote);
-      repaintNote(notes)
+      repaintNote(notes);
     });
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <img className="App-logo" alt="logo" src="./logo128.png" />
-        <span className="App-name">Just Note</span>
+        <div className="App-logo-name">
+          <img className="App-logo" alt="logo" src="./logo128.png" />
+          <span className="App-name">Just Note</span>
+        </div>
         <Search onSearch={searchNotes} searchQuery={noteState.searchQuery} />
-        <button className="App-add-button" onClick={() =>
-          addNote("")
-        }> + </button>
+        <button aria-label="Add new note" title="Add new note"
+          className="App-add-button" onClick={() =>
+            addNote("")
+          }> + </button>
       </header>
       <div className="App-main">
         <List notes={noteState.notes}

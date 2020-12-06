@@ -48,18 +48,18 @@
 }
 
 .App-add-button {
-    height: 40px;
-    width: 40px;
+    height: 56px;
+    width: 56px;
     border: 0 solid silver;
     border-radius: 100%;
     display: flex;
     align-items: center;
-    font-size: 32px;
+    font-size: 48px;
     justify-content: center;
     background: yellow;
     position: absolute;
-    right: 30px;
-    top: 32px;
+    right: 24px;
+    top: 24px;
     box-shadow: 1px 1px 10px #000;
 }
 
@@ -97,4 +97,32 @@
 
 .ShowsProgress.onTop::before {
     top: 0;
+}
+
+.App-logo-name {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+@media (max-width: 480px) {
+    .App-logo-name {
+        display: flex;
+        flex-direction: column;
+    }
+    .App-logo,
+    .App-name {
+        padding: 0;
+        margin: 0 8px;
+    }
+    .App-logo {
+        width: 32px;
+        position: relative;
+        top: 2px;
+    }
+    .App-name {
+        font-size: 18px;
+        position: relative;
+        top: -2px
+    }
 }

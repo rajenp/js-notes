@@ -112,6 +112,11 @@
     background: #bbb;
 }
 
+.Google-logout,
+.Google-login {
+    margin: 0 8px;
+}
+
 @media (max-width: 480px) {
     .App-logo-name {
         display: flex;

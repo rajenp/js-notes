@@ -105,6 +105,13 @@
     justify-items: center;
 }
 
+.App-login {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    background: #bbb;
+}
+
 @media (max-width: 480px) {
     .App-logo-name {
         display: flex;

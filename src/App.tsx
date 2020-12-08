@@ -3,19 +3,21 @@ import './App.css';
 import Search from './components/search/Search'
 import List from './components/list/List';
 import NoteService from './services/NotesService'
+import { GoogleLogin } from 'react-google-login';
 
 const { REACT_APP_API_URL } = process.env;
+const LS_KEY = 'just_note_user_id';
 const App: React.FC = () => {
 
   const initialNotes: NoteData[] = [];
-  const [noteState, setNoteState] = useState({ isLoaded: false, notes: initialNotes, searchQuery: "" });
+  const [noteState, setNoteState] = useState({ isLoaded: false, notes: initialNotes, searchQuery: "", userId: localStorage.getItem(LS_KEY) });
 
-  const service = useMemo(() => new NoteService(REACT_APP_API_URL || ""), []);
+  const service = useMemo(() => new NoteService((REACT_APP_API_URL || "") + "/" + noteState.userId), []);
 
-  const repaintNote = useCallback((notes: NoteData[], searchQuery?: string) => {
+  const repaintNote = useCallback((notes: NoteData[], searchQuery?: string, userId?: string) => {
     searchQuery = searchQuery !== undefined ? searchQuery : noteState.searchQuery;
-    setNoteState({ notes, searchQuery, isLoaded: true });
-  }, [noteState.searchQuery]);
+    setNoteState({ notes, searchQuery, isLoaded: true, userId: userId || noteState.userId });
+  }, [noteState.searchQuery, noteState.userId]);
 
   useEffect(() => {
     if (!noteState.isLoaded) {
@@ -63,6 +65,24 @@ const App: React.FC = () => {
     });
   }
 
+  const responseGoogle = (res: any) => {
+    console.log(res);
+    const userId = res.profileObj.email;
+    localStorage.setItem(LS_KEY, userId)
+    repaintNote(noteState.notes, noteState.searchQuery, userId)
+  }
+
+  let googleLogin: any;
+  if (!noteState.userId || noteState.userId.length === 0) {
+    googleLogin =
+      <GoogleLogin
+        buttonText="Login"
+        clientId="340076584691-ksovublitempcmv8enotb5ad96d1fl6m.apps.googleusercontent.com"
+        onSuccess={responseGoogle}
+        isSignedIn={true}
+      />
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -76,6 +96,9 @@ const App: React.FC = () => {
             addNote("")
           }> + </button>
       </header>
+      <div className="App-login">
+        {noteState.userId ? "Logged in as: " + noteState.userId + ""
+          : "Not logged in. Saving notes locally"} {googleLogin}</div>
       <div className="App-main">
         <List notes={noteState.notes}
           searchQuery={noteState.searchQuery}

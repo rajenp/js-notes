@@ -5,7 +5,6 @@ import List from './components/list/List';
 import RemoteNoteService from './services/RemoteNotesService'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import LocalNotesService from './services/LocalNotesService';
-import RemoteNotesService from './services/RemoteNotesService';
 
 const { REACT_APP_API_URL } = process.env;
 const LS_KEY = 'just_note_user_id';
@@ -28,7 +27,7 @@ const App: React.FC = () => {
 
   const repaintNote = useCallback((notes: NoteData[], searchQuery?: string, userId?: string) => {
     searchQuery = searchQuery !== undefined ? searchQuery : noteState.searchQuery;
-    setNoteState({ notes, searchQuery, isLoaded: true, userId: userId == undefined ? noteState.userId : userId });
+    setNoteState({ notes, searchQuery, isLoaded: true, userId: userId === undefined ? noteState.userId : userId });
   }, [noteState.searchQuery, noteState.userId]);
 
   useEffect(() => {

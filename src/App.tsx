@@ -19,11 +19,13 @@ const App: React.FC = () => {
   const [noteState, setNoteState] = useState({ isLoaded: false, notes: initialNotes, searchQuery: "", userId: localStorage.getItem(LS_KEY) });
 
   window.addEventListener('storage', (event) => {
-    service.getUserNotes().then(res => {
-      repaintNote(res.notes || [])
-    });
+    if (event.key === 'just_note_notes') {
+      service.getUserNotes().then(res => {
+        repaintNote(res.notes || [])
+      });
+    }
   });
-  
+
   let service: NotesSericeIface = useMemo(() => {
     if (noteState.userId) {
       return createRemoteService(noteState.userId);

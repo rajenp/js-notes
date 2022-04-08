@@ -12,11 +12,18 @@ const LS_KEY = 'just_note_user_id';
 const createRemoteService = (userId: string): NotesSericeIface => {
   return new RemoteNoteService((REACT_APP_API_URL || "") + "/" + userId)
 }
+
 const App: React.FC = () => {
 
   const initialNotes: NoteData[] = [];
   const [noteState, setNoteState] = useState({ isLoaded: false, notes: initialNotes, searchQuery: "", userId: localStorage.getItem(LS_KEY) });
 
+  window.addEventListener('storage', (event) => {
+    service.getUserNotes().then(res => {
+      repaintNote(res.notes || [])
+    });
+  });
+  
   let service: NotesSericeIface = useMemo(() => {
     if (noteState.userId) {
       return createRemoteService(noteState.userId);

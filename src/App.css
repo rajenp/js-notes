@@ -19,12 +19,16 @@
 }
 
 .App-header {
-    background-color: #282c34;
+    background-color: #370f31;
     display: flex;
     align-items: center;
     padding: 8px;
     height: 40px;
     position: relative;
+}
+
+.App.logged-in .App-header {
+    background-color: #3c693e;
 }
 
 .App-name {
@@ -57,10 +61,15 @@
     font-size: 48px;
     justify-content: center;
     background: yellow;
-    position: absolute;
-    right: 24px;
-    top: 24px;
     box-shadow: 1px 1px 10px #000;
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.App-add-button:focus,
+.App-add-button:hover {
+    box-shadow: 1px 1px 10px #000;
+    transform: scale(1.1);
 }
 
 @keyframes progress {
@@ -106,10 +115,12 @@
 }
 
 .App-login {
-    padding: 8px;
+    padding: 8px 32px 8px 24px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background: #bbb;
+    font-style: italic;
 }
 
 .Google-logout,

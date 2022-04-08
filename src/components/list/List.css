@@ -4,7 +4,7 @@
 }
 
 .List .Note {
-    flex: 40%;
+    flex: 100%;
 }
 
 .List.count-0 {

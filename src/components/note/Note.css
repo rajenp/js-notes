@@ -33,6 +33,14 @@
     display: flex;
     line-height: 24px;
     font-size: 16px;
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.Note-delete:focus,
+.Note-delete:hover {
+    box-shadow: 1px 1px 10px black;
+    transform: scale(1.2);
 }
 
 .Note-content {

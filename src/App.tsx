@@ -6,7 +6,7 @@ import RemoteNoteService from './services/RemoteNotesService'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import LocalNotesService from './services/LocalNotesService';
 
-const { REACT_APP_API_URL } = process.env;
+const { REACT_APP_API_URL, REACT_APP_CLIENT_ID } = process.env;
 const LS_KEY = 'just_note_user_id';
 
 const createRemoteService = (userId: string): NotesSericeIface => {
@@ -76,31 +76,39 @@ const App: React.FC = () => {
     });
   }
 
-  const loginSuccess = (res: any) => {
-    console.log(res);
-    const userId = res.profileObj.email;
-    localStorage.setItem(LS_KEY, userId)
-    service = createRemoteService(userId);
-    service.getUserNotes().then(res => {
-      repaintNote(res.notes, noteState.searchQuery, userId)
+  const syncNotes = (newService: NotesSericeIface, userId = '') => {
+    service.getUserNotes().then(async (res) => {
+
+      for (const note of res?.notes ?? []) {
+        await newService.addUserNote(note);
+      }
+
+      service = newService;
+      service.getUserNotes().then(res => {
+        repaintNote(res?.notes ?? [], noteState.searchQuery, userId);
+      });
     });
+  }
+
+  const loginSuccess = (res: any) => {
+    const userId = res.profileObj.email;
+    localStorage.setItem(LS_KEY, userId);
+    syncNotes(createRemoteService(userId), userId);
   }
 
   const logoutSuccess = () => {
+    syncNotes(new LocalNotesService());
     localStorage.removeItem(LS_KEY);
-    service = new LocalNotesService();
-    service.getUserNotes().then(res => {
-      repaintNote(res.notes, noteState.searchQuery, '')
-    });
   }
 
   let googleLogin: any;
+  let clientKey = REACT_APP_CLIENT_ID || '';
   if (!noteState.userId || noteState.userId.length === 0) {
     googleLogin =
       <GoogleLogin
         className="Google-login"
-        buttonText="Login"
-        clientId="340076584691-ksovublitempcmv8enotb5ad96d1fl6m.apps.googleusercontent.com"
+        buttonText={`Login`}
+        clientId={clientKey}
         onSuccess={loginSuccess}
         isSignedIn={true}
       />
@@ -108,28 +116,28 @@ const App: React.FC = () => {
     googleLogin =
       <GoogleLogout
         className="Google-logout"
-        buttonText="Logout"
-        clientId="340076584691-ksovublitempcmv8enotb5ad96d1fl6m.apps.googleusercontent.com"
+        clientId={clientKey}
+        buttonText={`Logout | ${noteState.userId}`}
         onLogoutSuccess={logoutSuccess}
       />
   }
-
+  const appClass = `App ${noteState.userId ? 'logged-in' : ''}`
   return (
-    <div className="App">
+    <div className={appClass}>
       <header className="App-header">
         <div className="App-logo-name">
           <img className="App-logo" alt="logo" src="./logo128.png" />
           <span className="App-name">Just Note</span>
         </div>
         <Search onSearch={searchNotes} searchQuery={noteState.searchQuery} />
+      </header>
+      <div className="App-login">
+        <div>{googleLogin} {!noteState.userId && ' to save remotely.'} </div>
         <button aria-label="Add new note" title="Add new note"
           className="App-add-button" onClick={() =>
             addNote("")
           }> + </button>
-      </header>
-      <div className="App-login">
-        {noteState.userId ? "Logged in as: " + noteState.userId + ""
-          : "Not logged in. Saving notes locally"} {googleLogin}</div>
+      </div>
       <div className="App-main">
         <List notes={noteState.notes}
           searchQuery={noteState.searchQuery}
@@ -137,7 +145,7 @@ const App: React.FC = () => {
           onChange={updateNote} />
       </div>
       <div className="App-footer">
-        Simple Notes management app by Rajendra Patil
+        &copy; {new Date().getFullYear()} | Just Note App by <a target="blank" href="https://www.linkedin.com/in/rajendrapatil/">Rajendra Patil</a>
       </div>
     </div>
   );

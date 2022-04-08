@@ -7,7 +7,7 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import LocalNotesService from './services/LocalNotesService';
 
 const { REACT_APP_API_URL, REACT_APP_CLIENT_ID } = process.env;
-const LS_KEY = 'just_note_user_id';
+const LS_KEY = 'just_note_notes';
 
 const createRemoteService = (userId: string): NotesSericeIface => {
   return new RemoteNoteService((REACT_APP_API_URL || "") + "/" + userId)
@@ -16,21 +16,13 @@ const createRemoteService = (userId: string): NotesSericeIface => {
 const App: React.FC = () => {
 
   const initialNotes: NoteData[] = [];
-  const [noteState, setNoteState] = useState({ isLoaded: false, notes: initialNotes, searchQuery: "", userId: localStorage.getItem(LS_KEY) });
-
-  window.addEventListener('storage', (event) => {
-    if (event.key === 'just_note_notes') {
-      service.getUserNotes().then(res => {
-        repaintNote(res.notes || [])
-      });
-    }
-  });
+  const [noteState, setNoteState] = useState({ isLoaded: false, notes: initialNotes, searchQuery: "", userId: localStorage.getItem(LS_KEY + '_user') });
 
   let service: NotesSericeIface = useMemo(() => {
     if (noteState.userId) {
       return createRemoteService(noteState.userId);
     } else {
-      return new LocalNotesService();
+      return new LocalNotesService(LS_KEY);
     }
   }, [noteState.userId]);
 
@@ -44,6 +36,13 @@ const App: React.FC = () => {
       service.getUserNotes().then(res => {
         repaintNote(res.notes || [])
       });
+      window.addEventListener('storage', (event) => {
+        if (event.key === LS_KEY) {
+          service.getUserNotes().then(res => {
+            repaintNote(res?.notes ?? noteState.notes, noteState.searchQuery, noteState.userId || '');
+          });
+        }
+      }, false);
     }
   }, [repaintNote, service, noteState.isLoaded]);
 
@@ -54,10 +53,10 @@ const App: React.FC = () => {
 
   const addNote: AddNote = (content: string) => {
     const newNote: NoteData = { time: String(Date.now()), content: content, isBusy: true };
-    //repaintNote([newNote, ...noteState.notes]);
+    repaintNote([newNote, ...noteState.notes]);
     service.addUserNote(newNote).then((res) => {
       delete newNote.isBusy;
-      repaintNote([newNote, ...noteState.notes], "");
+      // repaintNote([newNote, ...noteState.notes], "");
     });
   }
 
@@ -101,13 +100,13 @@ const App: React.FC = () => {
 
   const loginSuccess = (res: any) => {
     const userId = res.profileObj.email;
-    localStorage.setItem(LS_KEY, userId);
+    localStorage.setItem(LS_KEY + '_user', userId);
     syncNotes(createRemoteService(userId), userId);
   }
 
   const logoutSuccess = () => {
-    syncNotes(new LocalNotesService());
-    localStorage.removeItem(LS_KEY);
+    syncNotes(new LocalNotesService(LS_KEY));
+    localStorage.removeItem(LS_KEY + '_user');
   }
 
   let googleLogin: any;
